@@ -1,0 +1,58 @@
+<html>
+  <style>
+    canvas {
+      width: 300px;
+      height: 300px;
+      image-rendering: pixelated;
+    }
+    #legend {
+      margin: 10px;
+    }
+    #legend > * {
+      display: inline-block;
+    }
+    #cont > * {
+      display: inline-block;
+    }
+    #tip {
+      display: none; position: fixed; left: 30px; z-index: 333; cursor: default;
+    background-color: antiquewhite; padding: 5px; pointer-events: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    }
+  </style>
+  <body>
+    <div id="tip" ></div>
+    <h2>Heat distribution problem in WebGL</h2>
+
+    <div id="cont">
+      <canvas></canvas>
+      <div id = 'legend'>
+        <img src="legend.png"/><span>100<br><br><br><br>75<br><br><br><br>
+          50<br><br><br><br>25<br><br><br><br>0</span>
+            </div>
+    </div>
+    <div style="width: 500px">
+      Classical problem of heat distribution solved with WebGL shaders. 
+      Initial and calculated data are stored in texture.<br>
+      There are 2 shaders here: <br>
+      1. Compute shader receives texture with data and converts color of pixels form 
+      RGBA to float format. Then calculation performed. Finally calculated values
+      converted back to RGBA format.
+      <br>2. Display shader receives temperature as texture, converts it to float
+      value and selects color which corresponds this value. Isolines are also drawn here.
+      
+<br><br>
+<b><i>You can play with sliders and/or mouse to change the conditions</i> </b><br>
+Please note: this will not work at mobile devices due to percision limitations.
+Experimentally, I have found that at mobile devices precision is limited by 3 bytes
+whereas at desctops we have 4 bytes precision. This will require to completely 
+rewrite the conversion algorithm to make it work at mobile.
+    </div>
+    
+   
+  </body>
+  <script src="dat.gui.min.js"></script>
+  <script src="webgl2lib.js"></script>
+  <script src="index2.js"></script>
+</html>
